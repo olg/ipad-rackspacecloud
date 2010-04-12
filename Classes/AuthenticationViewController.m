@@ -42,12 +42,11 @@
 -(void)loadImages {
 	ASICloudServersImageRequest *imageRequest = [ASICloudServersImageRequest listRequest];
 	[imageRequest setDelegate:self];
+    [imageRequest setTimeOutSeconds:30];
 	[imageRequest setDidFinishSelector:@selector(imageListRequestFinished:)];
 	[imageRequest setDidFailSelector:@selector(imageListRequestFailed:)];
 	[imageRequest startAsynchronous];
 }
-
-
 
 #pragma mark -
 #pragma mark View Lifecycle

@@ -39,6 +39,8 @@
         [currentFolderNavigation release];
         currentFolderNavigation = [[NSMutableArray alloc] initWithCapacity:10];
 	}
+    
+    NSLog(@"response text: %@", [request responseString]);
 	
     // //NSLog(@"------------------------------------------------------");
     // //NSLog(@"------------------------------------------------------");

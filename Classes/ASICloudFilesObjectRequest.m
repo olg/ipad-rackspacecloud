@@ -192,11 +192,15 @@
     }
     [copy release];
 	
+    
+    // TODO: ecarlin crash is here!
 	// go through each folder name, and recursively call this method
     for (int i = 0; i < [folderNames count]; i++) {
-		NSString *folderName = [folderNames objectAtIndex:i];
-        ASICloudFilesFolder *folder = [self buildFolder:folderName withFiles:folderedFiles andParent:root];
-        [root.folders addObject:folder];
+        if ([folderedFiles count] > 1) { // TODO: this prevents an infinite loop
+            NSString *folderName = [folderNames objectAtIndex:i];
+            ASICloudFilesFolder *folder = [self buildFolder:folderName withFiles:folderedFiles andParent:root];
+            [root.folders addObject:folder];
+        }
     }
 	
     [folderNames release];

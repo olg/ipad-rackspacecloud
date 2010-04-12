@@ -196,6 +196,10 @@
 		27FC9143116E8F5400250D42 /* LogoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FC9141116E8F5400250D42 /* LogoutViewController.m */; };
 		27FC9144116E8F5400250D42 /* LogoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FC9142116E8F5400250D42 /* LogoutViewController.xib */; };
 		27FC92A3116FBD2200250D42 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27FC92A2116FBD2200250D42 /* Entitlements.plist */; };
+		27FC98901173A55200250D42 /* PasswordLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FC988E1173A55200250D42 /* PasswordLockViewController.m */; };
+		27FC98911173A55200250D42 /* PasswordLockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FC988F1173A55200250D42 /* PasswordLockViewController.xib */; };
+		27FC989B1173A82E00250D42 /* SetPasswordLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FC98991173A82E00250D42 /* SetPasswordLockViewController.m */; };
+		27FC989C1173A82E00250D42 /* SetPasswordLockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 27FC989A1173A82E00250D42 /* SetPasswordLockViewController.xib */; };
 		2804200B108E984D000629CD /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28042008108E984D000629CD /* MasterViewController.m */; };
 		2804200C108E984D000629CD /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804200A108E984D000629CD /* DetailViewController.m */; };
 		2804203C108E9BAB000629CD /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2804203B108E9BAB000629CD /* DetailView.xib */; };
@@ -525,6 +529,12 @@
 		27FC9141116E8F5400250D42 /* LogoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutViewController.m; sourceTree = "<group>"; };
 		27FC9142116E8F5400250D42 /* LogoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutViewController.xib; sourceTree = "<group>"; };
 		27FC92A2116FBD2200250D42 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		27FC988D1173A55200250D42 /* PasswordLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordLockViewController.h; sourceTree = "<group>"; };
+		27FC988E1173A55200250D42 /* PasswordLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordLockViewController.m; sourceTree = "<group>"; };
+		27FC988F1173A55200250D42 /* PasswordLockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordLockViewController.xib; sourceTree = "<group>"; };
+		27FC98981173A82E00250D42 /* SetPasswordLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordLockViewController.h; sourceTree = "<group>"; };
+		27FC98991173A82E00250D42 /* SetPasswordLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordLockViewController.m; sourceTree = "<group>"; };
+		27FC989A1173A82E00250D42 /* SetPasswordLockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetPasswordLockViewController.xib; sourceTree = "<group>"; };
 		28042007108E984D000629CD /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		28042008108E984D000629CD /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		28042009108E984D000629CD /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -1245,6 +1255,12 @@
 				27FC9140116E8F5400250D42 /* LogoutViewController.h */,
 				27FC9141116E8F5400250D42 /* LogoutViewController.m */,
 				27FC9142116E8F5400250D42 /* LogoutViewController.xib */,
+				27FC988D1173A55200250D42 /* PasswordLockViewController.h */,
+				27FC988E1173A55200250D42 /* PasswordLockViewController.m */,
+				27FC988F1173A55200250D42 /* PasswordLockViewController.xib */,
+				27FC98981173A82E00250D42 /* SetPasswordLockViewController.h */,
+				27FC98991173A82E00250D42 /* SetPasswordLockViewController.m */,
+				27FC989A1173A82E00250D42 /* SetPasswordLockViewController.xib */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -1458,6 +1474,8 @@
 				27FC8FC6116E699700250D42 /* AccountViewController.xib in Resources */,
 				27FC9144116E8F5400250D42 /* LogoutViewController.xib in Resources */,
 				27FC92A3116FBD2200250D42 /* Entitlements.plist in Resources */,
+				27FC98911173A55200250D42 /* PasswordLockViewController.xib in Resources */,
+				27FC989C1173A82E00250D42 /* SetPasswordLockViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1563,6 +1581,8 @@
 				27FC8E58116E2CE700250D42 /* SettingsViewController.m in Sources */,
 				27FC8FC5116E699700250D42 /* AccountViewController.m in Sources */,
 				27FC9143116E8F5400250D42 /* LogoutViewController.m in Sources */,
+				27FC98901173A55200250D42 /* PasswordLockViewController.m in Sources */,
+				27FC989B1173A82E00250D42 /* SetPasswordLockViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

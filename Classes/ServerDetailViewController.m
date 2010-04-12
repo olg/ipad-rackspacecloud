@@ -68,10 +68,13 @@
 
 -(void)loadServer {
 	ASICloudServersServerRequest *request = [ASICloudServersServerRequest getServerRequest:self.server.serverId];
-	[request setDelegate:self];
-	[request setDidFinishSelector:@selector(getServerRequestFinished:)];
-	[request setDidFailSelector:@selector(getServerRequestFailed:)];
-	[request startAsynchronous];	
+	//[request setDelegate:self];
+	//[request setDidFinishSelector:@selector(getServerRequestFinished:)];
+	//[request setDidFailSelector:@selector(getServerRequestFailed:)];
+	//[request startAsynchronous];
+    
+    [self request:request behavior:@"polling your server" success:@selector(getServerRequestFinished:) failure:@selector(getServerRequestFailed:) showSpinner:NO];
+    
 }
 
 - (void)listBackupScheduleSuccess:(ASICloudServersServerRequest *)request {

@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "UISwitchCell.h"
 #import "AccountViewController.h"
+#import "SetPasswordLockViewController.h"
 
 #define kPrimaryAccountSection 0
 #define kSecondaryAccountsSection 1
@@ -54,12 +55,20 @@
 }
 */
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.
     return YES;
 }
 
+#pragma mark -
+#pragma mark Password Lock switch
+
+- (void)passwordLockSwitchChanged {    
+    SetPasswordLockViewController *vc = [[SetPasswordLockViewController alloc] initWithNibName:@"SetPasswordLockViewController" bundle:nil];
+    vc.settingsViewController = self;
+    vc.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentModalViewController:vc animated:YES];
+}
 
 #pragma mark -
 #pragma mark Table view data source
@@ -155,7 +164,9 @@
             cell.textLabel.text = @"Add an account...";
         }
     } else if (indexPath.section == kPasswordLockSection) {
-        return [self switchCell:aTableView label:@"Password Lock" action:nil value:NO];
+        NSString *password = [defaults stringForKey:@"lock_password"];
+        BOOL hasPassword = (password != nil) && ![password isEqualToString:@""];
+        return [self switchCell:aTableView label:@"Password Lock" action:@selector(passwordLockSwitchChanged) value:hasPassword];
     }
     
     return cell;

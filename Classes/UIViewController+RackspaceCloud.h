@@ -12,6 +12,8 @@
 @interface UIViewController (RackspaceCloud)
 
 -(void)request:(ASICloudFilesRequest *)request behavior:(NSString *)behavior success:(SEL)success;
+-(void)request:(ASICloudFilesRequest *)request behavior:(NSString *)behavior success:(SEL)success failure:(SEL)failure;
 -(void)request:(ASICloudFilesRequest *)request behavior:(NSString *)behavior success:(SEL)success showSpinner:(BOOL)showSpinner;
+-(void)request:(ASICloudFilesRequest *)request behavior:(NSString *)behavior success:(SEL)success failure:(SEL)failure showSpinner:(BOOL)showSpinner;
 
 @end

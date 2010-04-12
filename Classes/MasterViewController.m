@@ -179,10 +179,12 @@
         }        
         [popoverController dismissPopoverAnimated:YES];        
 	} else if (indexPath.row == 1) {
+        // TODO: password check goes here
 		ServersListViewController *vc = [[ServersListViewController alloc] initWithNibName:@"ServersListViewController" bundle:nil];
 		[self.navigationController pushViewController:vc animated:YES];
 		[vc release];
 	} else if (indexPath.row == 2) {
+        // TODO: password check goes here
 		ContainersListViewController *vc = [[ContainersListViewController alloc] initWithNibName:@"ContainersListViewController" bundle:nil];
 		[self.navigationController pushViewController:vc animated:YES];
 		[vc release];
