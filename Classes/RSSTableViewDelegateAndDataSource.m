@@ -313,7 +313,11 @@ static UIImage *ukFlag = nil;
 	// might be slower to make the extra cellForRowAtIndexPath call, but it's flexible and DRY
     // who cares anyway?  it's not like we have lots of rows or anything
 	//return 700.0;
-	return ((UITableViewCell *)[self tableView:aTableView cellForRowAtIndexPath:indexPath]).frame.size.height;
+    if (indexPath.section == 0) {
+        return 44.0;
+    } else {
+        return ((UITableViewCell *)[self tableView:aTableView cellForRowAtIndexPath:indexPath]).frame.size.height;
+    }
 }
 
 #pragma mark -
