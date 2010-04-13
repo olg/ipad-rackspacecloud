@@ -26,4 +26,6 @@
 @property(nonatomic, assign) UIPopoverController *popoverController;
 @property(nonatomic, assign) UIBarButtonItem *rootPopoverBarButtonItem;
 
+- (void)preselect;
+
 @end

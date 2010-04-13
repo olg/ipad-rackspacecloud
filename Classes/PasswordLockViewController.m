@@ -7,9 +7,39 @@
 //
 
 #import "PasswordLockViewController.h"
-
+#import "MasterViewController.h"
+#import "TextFieldCell.h"
+#import "UIViewController+SpinnerView.h"
 
 @implementation PasswordLockViewController
+
+@synthesize callback, masterViewController;
+
+#pragma mark -
+#pragma mark Button Handlers
+
+-(void)cancelButtonPressed:(id)sender {
+    [self.masterViewController preselect];
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)loginButtonPressed:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *correctPassword = [defaults stringForKey:@"lock_password"];
+    
+    if ([textField.text isEqualToString:correctPassword]) {        
+        if ([self.masterViewController respondsToSelector:callback]) {
+            NSMethodSignature *signature = [self.masterViewController methodSignatureForSelector:callback];
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+            [invocation setTarget:self.masterViewController];
+            [invocation setSelector:callback];
+            [invocation invoke];
+        }
+        [self dismissModalViewControllerAnimated:YES];
+    } else {
+        [self alert:@"Login Failed" message:@"The password you provided is incorrect.  Please try again."];
+    }
+}
 
 
 #pragma mark -
@@ -32,11 +62,12 @@
     [super viewWillAppear:animated];
 }
 */
-/*
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [textField becomeFirstResponder];
 }
-*/
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -69,15 +100,21 @@
     return 1;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Password";
+}
+
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    TextFieldCell *cell = (TextFieldCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        textField = cell.textField;
+        textField.secureTextEntry = YES;
     }
     
     // Configure the cell...
@@ -158,6 +195,7 @@
 
 
 - (void)dealloc {
+    [masterViewController release];
     [super dealloc];
 }
 

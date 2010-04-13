@@ -13,6 +13,7 @@
 #import "RackspaceCloudAppDelegate.h"
 #import "SettingsViewController.h"
 #import "LogoutViewController.h"
+#import "PasswordLockViewController.h"
 
 
 @implementation MasterViewController
@@ -23,7 +24,29 @@
 @synthesize popoverController;
 
 #pragma mark -
-#pragma mark Log out
+#pragma mark Utiltieis
+
+- (BOOL)requiresPassword {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *password = [defaults stringForKey:@"lock_password"];
+    return (password != nil) && ![password isEqualToString:@""];
+}
+
+- (void)moveToCloudServers {
+    RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
+    app.isPasswordLocked = NO;
+    ServersListViewController *vc = [[ServersListViewController alloc] initWithNibName:@"ServersListViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
+}
+
+- (void)moveToCloudFiles {
+    RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
+    app.isPasswordLocked = NO;
+    ContainersListViewController *vc = [[ContainersListViewController alloc] initWithNibName:@"ContainersListViewController" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc release];
+}
 
 - (void)logout {
     LogoutViewController *vc = [[LogoutViewController alloc] initWithNibName:@"LogoutViewController" bundle:nil];
@@ -74,7 +97,6 @@
     NSDictionary *secondaryAccounts = [defaults objectForKey:@"secondary_accounts"];
     
     if ([secondaryAccounts count] > 0) {
-        // TODO: also render this the first time a secondary account is added
         self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Switch User" style:UIBarButtonItemStyleBordered target:self action:@selector(logout)] autorelease];
     }
 
@@ -180,14 +202,26 @@
         [popoverController dismissPopoverAnimated:YES];        
 	} else if (indexPath.row == 1) {
         // TODO: password check goes here
-		ServersListViewController *vc = [[ServersListViewController alloc] initWithNibName:@"ServersListViewController" bundle:nil];
-		[self.navigationController pushViewController:vc animated:YES];
-		[vc release];
+        if ([self requiresPassword]) {
+            PasswordLockViewController *vc = [[PasswordLockViewController alloc] initWithNibName:@"PasswordLockViewController" bundle:nil];
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            vc.callback = @selector(moveToCloudServers);
+            vc.masterViewController = self;
+            [self presentModalViewController:vc animated:YES];
+        } else {
+            [self moveToCloudServers];
+        }
 	} else if (indexPath.row == 2) {
         // TODO: password check goes here
-		ContainersListViewController *vc = [[ContainersListViewController alloc] initWithNibName:@"ContainersListViewController" bundle:nil];
-		[self.navigationController pushViewController:vc animated:YES];
-		[vc release];
+        if ([self requiresPassword]) {
+            PasswordLockViewController *vc = [[PasswordLockViewController alloc] initWithNibName:@"PasswordLockViewController" bundle:nil];
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            vc.callback = @selector(moveToCloudFiles);
+            vc.masterViewController = self;
+            [self presentModalViewController:vc animated:YES];
+        } else {
+            [self moveToCloudFiles];
+        }
 	} else if (indexPath.row == 3) {
 		RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];		
         if (detailViewController != nil) {

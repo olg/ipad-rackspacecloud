@@ -95,6 +95,11 @@
     // we don't actually need the lock password here, but it's introduced in version 1.1,
     // so we're going to see if it exists so we can register the new 1.1 preferences
     NSString *lockPassword = [defaults stringForKey:@"lock_password"];
+    
+    if (lockPassword == nil || [lockPassword isEqualToString:@""]) {
+        RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
+        app.isPasswordLocked = NO;
+    }
 	
 	if (username == nil) {
 		username = @"";

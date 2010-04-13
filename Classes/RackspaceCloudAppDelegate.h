@@ -20,6 +20,7 @@
     MasterViewController *masterViewController;
     UIViewController<SubstitutableDetailViewController> *detailViewController;
 	AuthenticationViewController *authenticationViewController;
+    BOOL isPasswordLocked;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -27,6 +28,7 @@
 @property (nonatomic,retain) IBOutlet MasterViewController *masterViewController;
 @property (nonatomic, retain) IBOutlet UIViewController<SubstitutableDetailViewController> *detailViewController;
 @property (nonatomic,retain) IBOutlet AuthenticationViewController *authenticationViewController;
+@property (nonatomic) BOOL isPasswordLocked;
 
 - (NSString *)applicationDocumentsDirectory;
 

@@ -17,6 +17,7 @@
 @implementation RackspaceCloudAppDelegate
 
 @synthesize window, splitViewController, masterViewController, detailViewController, authenticationViewController;
+@synthesize isPasswordLocked;
 
 /**
  Returns the path to the application's documents directory.
