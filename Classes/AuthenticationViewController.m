@@ -42,7 +42,6 @@
 -(void)loadImages {
 	ASICloudServersImageRequest *imageRequest = [ASICloudServersImageRequest listRequest];
 	[imageRequest setDelegate:self];
-    [imageRequest setTimeOutSeconds:30];
 	[imageRequest setDidFinishSelector:@selector(imageListRequestFinished:)];
 	[imageRequest setDidFailSelector:@selector(imageListRequestFailed:)];
 	[imageRequest startAsynchronous];
@@ -96,9 +95,11 @@
     // so we're going to see if it exists so we can register the new 1.1 preferences
     NSString *lockPassword = [defaults stringForKey:@"lock_password"];
     
+    RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
     if (lockPassword == nil || [lockPassword isEqualToString:@""]) {
-        RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
         app.isPasswordLocked = NO;
+    } else {
+        app.isPasswordLocked = YES;
     }
 	
 	if (username == nil) {

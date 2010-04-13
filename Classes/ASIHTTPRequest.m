@@ -227,7 +227,7 @@ static BOOL isiPhoneOS2;
 	[self setDefaultResponseEncoding:NSISOLatin1StringEncoding];
 	[self setShouldPresentProxyAuthenticationDialog:YES];
 	
-	[self setTimeOutSeconds:10];
+	[self setTimeOutSeconds:120];
 	[self setUseSessionPersistance:YES];
 	[self setUseCookiePersistance:YES];
 	[self setValidatesSecureCertificate:YES];

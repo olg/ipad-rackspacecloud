@@ -13,8 +13,10 @@
 @interface SettingsViewController : RackspaceCloudSplitViewDelegate {
 	IBOutlet UITableView *tableView;
 	NSUserDefaults *defaults;
+    UISwitch *passwordLockSwitch;
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) UISwitch *passwordLockSwitch;
 
 @end

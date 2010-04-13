@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class MasterViewController;
+@class MasterViewController, SettingsViewController;
 
 @interface PasswordLockViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     SEL callback;
     MasterViewController *masterViewController;
+    SettingsViewController *settingsViewController;
     UITextField *textField;
 }
 
 @property (nonatomic) SEL callback;
 @property (nonatomic, retain) MasterViewController *masterViewController;
+@property (nonatomic, retain) SettingsViewController *settingsViewController;
 
 -(void)cancelButtonPressed:(id)sender;
 -(void)loginButtonPressed:(id)sender;

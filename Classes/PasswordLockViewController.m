@@ -10,16 +10,24 @@
 #import "MasterViewController.h"
 #import "TextFieldCell.h"
 #import "UIViewController+SpinnerView.h"
+#import "SettingsViewController.h"
+#import "RackspaceCloudAppDelegate.h"
 
 @implementation PasswordLockViewController
 
-@synthesize callback, masterViewController;
+@synthesize callback, masterViewController, settingsViewController;
 
 #pragma mark -
 #pragma mark Button Handlers
 
 -(void)cancelButtonPressed:(id)sender {
-    [self.masterViewController preselect];
+    if (self.masterViewController != nil) {
+        [self.masterViewController preselect];
+    } else if (self.settingsViewController != nil) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSNumber *enabled = [defaults objectForKey:@"password_lock_enabled"];
+        self.settingsViewController.passwordLockSwitch.enabled = [enabled boolValue];
+    }
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -28,12 +36,18 @@
     NSString *correctPassword = [defaults stringForKey:@"lock_password"];
     
     if ([textField.text isEqualToString:correctPassword]) {        
-        if ([self.masterViewController respondsToSelector:callback]) {
+        if (self.masterViewController != nil && [self.masterViewController respondsToSelector:callback]) {
             NSMethodSignature *signature = [self.masterViewController methodSignatureForSelector:callback];
             NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
             [invocation setTarget:self.masterViewController];
             [invocation setSelector:callback];
             [invocation invoke];
+        } else if (self.settingsViewController != nil && [self.settingsViewController respondsToSelector:callback]) {
+            NSMethodSignature *signature = [self.settingsViewController methodSignatureForSelector:callback];
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+            [invocation setTarget:self.settingsViewController];
+            [invocation setSelector:callback];
+            [invocation invoke];            
         }
         [self dismissModalViewControllerAnimated:YES];
     } else {
@@ -196,6 +210,7 @@
 
 - (void)dealloc {
     [masterViewController release];
+    [settingsViewController release];
     [super dealloc];
 }
 

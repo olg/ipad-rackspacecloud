@@ -27,9 +27,10 @@
 #pragma mark Utiltieis
 
 - (BOOL)requiresPassword {
+    RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *password = [defaults stringForKey:@"lock_password"];
-    return (password != nil) && ![password isEqualToString:@""];
+    return app.isPasswordLocked && (password != nil) && ![password isEqualToString:@""];
 }
 
 - (void)moveToCloudServers {
@@ -207,6 +208,7 @@
             vc.modalPresentationStyle = UIModalPresentationFormSheet;
             vc.callback = @selector(moveToCloudServers);
             vc.masterViewController = self;
+            vc.settingsViewController = nil;
             [self presentModalViewController:vc animated:YES];
         } else {
             [self moveToCloudServers];
@@ -218,6 +220,7 @@
             vc.modalPresentationStyle = UIModalPresentationFormSheet;
             vc.callback = @selector(moveToCloudFiles);
             vc.masterViewController = self;
+            vc.settingsViewController = nil;
             [self presentModalViewController:vc animated:YES];
         } else {
             [self moveToCloudFiles];

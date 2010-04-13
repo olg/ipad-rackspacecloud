@@ -12,16 +12,13 @@
 
 @interface SetPasswordLockViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     NSUserDefaults *defaults;
-    NSString *initialLockPassword;
     
-    UITextField *oldPasswordTextField;
     UITextField *newPasswordTextField;
     UITextField *confirmPasswordTextField;
     
     SettingsViewController *settingsViewController;
 }
 
-@property (nonatomic, retain) UITextField *oldPasswordTextField;
 @property (nonatomic, retain) UITextField *newPasswordTextField;
 @property (nonatomic, retain) UITextField *confirmPasswordTextField;
 @property (nonatomic, retain) SettingsViewController *settingsViewController;

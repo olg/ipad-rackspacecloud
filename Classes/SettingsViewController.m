@@ -10,6 +10,8 @@
 #import "UISwitchCell.h"
 #import "AccountViewController.h"
 #import "SetPasswordLockViewController.h"
+#import "RackspaceCloudAppDelegate.h"
+#import "PasswordLockViewController.h"
 
 #define kPrimaryAccountSection 0
 #define kSecondaryAccountsSection 1
@@ -17,7 +19,16 @@
 
 @implementation SettingsViewController
 
-@synthesize tableView;
+@synthesize tableView, passwordLockSwitch;
+
+#pragma mark -
+#pragma mark Utilities
+
+- (BOOL)requiresPassword {
+    RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
+    NSString *password = [defaults stringForKey:@"lock_password"];
+    return app.isPasswordLocked && (password != nil) && ![password isEqualToString:@""];
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -63,11 +74,31 @@
 #pragma mark -
 #pragma mark Password Lock switch
 
-- (void)passwordLockSwitchChanged {    
-    SetPasswordLockViewController *vc = [[SetPasswordLockViewController alloc] initWithNibName:@"SetPasswordLockViewController" bundle:nil];
-    vc.settingsViewController = self;
-    vc.modalPresentationStyle = UIModalPresentationFormSheet;
-    [self presentModalViewController:vc animated:YES];
+- (void)persistLockSwitchValue {
+    RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
+    NSLog(@"switch value: %i", !self.passwordLockSwitch.enabled);
+    app.isPasswordLocked = NO;
+    [defaults setObject:[NSNumber numberWithBool:!self.passwordLockSwitch.enabled] forKey:@"password_lock_enabled"];
+    if (self.passwordLockSwitch.enabled) {
+        [defaults setObject:@"" forKey:@"lock_password"];
+    }
+    [defaults synchronize];
+}
+
+- (void)passwordLockSwitchChanged {
+    if ([self requiresPassword]) {
+        PasswordLockViewController *vc = [[PasswordLockViewController alloc] initWithNibName:@"PasswordLockViewController" bundle:nil];
+        vc.modalPresentationStyle = UIModalPresentationFormSheet;
+        vc.callback = @selector(persistLockSwitchValue);
+        vc.masterViewController = nil;
+        vc.settingsViewController = self;
+        [self presentModalViewController:vc animated:YES];
+    } else {        
+        SetPasswordLockViewController *vc = [[SetPasswordLockViewController alloc] initWithNibName:@"SetPasswordLockViewController" bundle:nil];
+        vc.settingsViewController = self;
+        vc.modalPresentationStyle = UIModalPresentationFormSheet;
+        [self presentModalViewController:vc animated:YES];
+    }
 }
 
 #pragma mark -
@@ -116,6 +147,7 @@
 	
 	if (cell == nil) {
 		cell = [[UISwitchCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:label delegate:self action:action value:value];
+        passwordLockSwitch = cell.uiSwitch;
 	}
     
     // handle orientation placement issues
@@ -267,6 +299,7 @@
 
 - (void)dealloc {
     [tableView release];
+    [passwordLockSwitch release];
     [super dealloc];
 }
 
