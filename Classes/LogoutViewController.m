@@ -134,14 +134,6 @@
     NSString *username;
     NSString *apiKey;
     
-    initialUsername = [ASICloudFilesRequest username];
-    initialApiKey = [ASICloudFilesRequest apiKey];
-    initialFlavors = [NSArray arrayWithArray:[ASICloudServersFlavorRequest flavors]];
-    initialImages = [NSArray arrayWithArray:[ASICloudServersImageRequest images]];
-    initialStorageURL = [NSString stringWithString:[ASICloudFilesRequest storageURL]];
-    initialCdnManagementURL = [NSString stringWithString:[ASICloudFilesRequest cdnManagementURL]];
-    initialServerManagementURL = [NSString stringWithString:[ASICloudFilesRequest serverManagementURL]];
-    
     [self showSpinnerView];
     
     if (selectedIndex == 0) {
@@ -194,6 +186,15 @@
             selectedIndex = i + 1;
         }
     }
+    
+    initialUsername = [[NSString alloc] initWithString:[ASICloudFilesRequest username]];
+    initialApiKey = [[NSString alloc] initWithString:[ASICloudFilesRequest apiKey]];
+    initialFlavors = [[NSArray alloc] initWithArray:[ASICloudServersFlavorRequest flavors]];
+    initialImages = [[NSArray alloc] initWithArray:[ASICloudServersImageRequest images]];
+    initialStorageURL = [[NSString alloc] initWithString:[ASICloudFilesRequest storageURL]];
+    initialCdnManagementURL = [[NSString alloc] initWithString:[ASICloudFilesRequest cdnManagementURL]];
+    initialServerManagementURL = [[NSString alloc] initWithString:[ASICloudFilesRequest serverManagementURL]];
+    
 }
 
 /*
@@ -332,6 +333,15 @@
 
 
 - (void)dealloc {
+    
+    [initialUsername release];
+    [initialApiKey release];
+    [initialStorageURL release];
+    [initialCdnManagementURL release];
+    [initialServerManagementURL release];
+    
+    [initialFlavors release];
+    [initialImages release];
     [accounts release];
     [super dealloc];
 }
