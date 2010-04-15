@@ -81,7 +81,7 @@
     if (section == 0) {
         return @"Password";
     } else {
-        return @"New Password";
+        return @"Confirm Password";
     }
 }
 

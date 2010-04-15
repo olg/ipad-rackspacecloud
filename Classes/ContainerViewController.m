@@ -620,14 +620,11 @@
 
         if ([self numberOfSectionsInTableView:aTableView] == 3) {
             // it's a file!
-            // TODO: restore when you have a device
-            /*
             if ([MFMailComposeViewController canSendMail]) {
                 ASICloudFilesFolder *fileFolder = [currentFolderNavigation objectAtIndex:offsetSection];
                 ASICloudFilesObject *file = [fileFolder.files objectAtIndex:indexPath.row];
                 [self didSelectFile:file];
             }
-             */
         } else {            
             
             if (offsetSection < [currentFolderNavigation count]) {
@@ -666,14 +663,11 @@
                         }
                     } else {
                         // it's a file!
-                        // TODO: restore when you have a device
-                        /*
                         if ([MFMailComposeViewController canSendMail]) {
                             ASICloudFilesFolder *fileFolder = [currentFolderNavigation objectAtIndex:offsetSection];
                             ASICloudFilesObject *file = [fileFolder.files objectAtIndex:indexPath.row];
                             [self didSelectFile:file];
                         }
-                         */
                     }
                 } else {
                     while (offsetSection < ([currentFolderNavigation count] - 1)) {

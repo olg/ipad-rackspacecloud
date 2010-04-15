@@ -237,7 +237,7 @@
         app.splitViewController.viewControllers = [NSArray arrayWithObjects:[self.splitViewController.viewControllers objectAtIndex:0], vc, nil];        
         if (self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
             // force the button to stay
-            //[vc showRootPopoverButtonItem:app.masterViewController.rootPopoverBarButtonItem];
+            [vc showRootPopoverButtonItem:app.masterViewController.rootPopoverBarButtonItem];
         }        
         [popoverController dismissPopoverAnimated:YES];
     }

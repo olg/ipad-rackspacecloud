@@ -17,14 +17,19 @@
     NSString *originalUsername;
 	UITextField *usernameTextField;
 	UITextField *apiKeyTextField;
+    IBOutlet UIView *footerView;
+    IBOutlet UITableView *tableView;
 }
 
 @property (nonatomic, retain) IBOutlet UINavigationItem *navigationItem;
 @property (nonatomic, retain) SettingsViewController *settingsViewController;
 @property (nonatomic) BOOL primaryAccount;
 @property (nonatomic, retain) NSString *originalUsername;
+@property (nonatomic, retain) IBOutlet UIView *footerView;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 -(void)cancelButtonPressed:(id)sender;
 -(void)saveButtonPressed:(id)sender;
+-(void)deleteButtonPressed:(id)sender;
 
 @end

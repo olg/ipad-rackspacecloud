@@ -17,6 +17,8 @@
 @synthesize settingsViewController;
 @synthesize primaryAccount;
 @synthesize originalUsername;
+@synthesize footerView;
+@synthesize tableView;
 
 #pragma mark -
 #pragma mark Button Handlers
@@ -49,6 +51,19 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+-(void)deleteButtonPressed:(id)sender {
+    // you can only delete secondary accounts
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *secondaryAccounts = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"secondary_accounts"]];
+    
+    [secondaryAccounts removeObjectForKey:originalUsername];    
+    [defaults setObject:[NSDictionary dictionaryWithDictionary:secondaryAccounts] forKey:@"secondary_accounts"];
+    
+    [defaults synchronize];
+    [self.settingsViewController.tableView reloadData];
+    
+	[self dismissModalViewControllerAnimated:YES];    
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -74,6 +89,7 @@
     } else if (originalUsername) {
         self.navigationItem.title = @"Edit Account";
         // TODO: show delete button
+        self.tableView.tableFooterView = self.footerView;
     } else {
         self.navigationItem.title = @"Add Account";
         [usernameTextField becomeFirstResponder];
@@ -126,11 +142,11 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
 	if (indexPath.section == 0) {
 		static NSString *CellIdentifier = @"UsernameCell";
-		TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		TextFieldCell *cell = (TextFieldCell *)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
 			cell = [[[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 			usernameTextField = cell.textField;
@@ -150,7 +166,7 @@
 		return cell;
 	} else {
 		static NSString *CellIdentifier = @"APIKeyCell";
-		TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+		TextFieldCell *cell = (TextFieldCell *)[aTableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
 			cell = [[[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 			apiKeyTextField = cell.textField;
@@ -250,6 +266,8 @@
     [navigationItem release];
     [settingsViewController release];
     [originalUsername release];
+    [footerView release];
+    [tableView release];
     [super dealloc];
 }
 

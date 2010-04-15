@@ -10,7 +10,7 @@
 #import "RackspaceCloudSplitViewDelegate.h"
 
 
-@interface SettingsViewController : RackspaceCloudSplitViewDelegate {
+@interface SettingsViewController : RackspaceCloudSplitViewDelegate <UITableViewDataSource, UITableViewDelegate> {
 	IBOutlet UITableView *tableView;
 	NSUserDefaults *defaults;
     UISwitch *passwordLockSwitch;
