@@ -48,6 +48,10 @@ static UIImage *cloudServersBackground = nil;
 
 @synthesize status, updated, name, imageId;
 
+-(NSString *)name {
+    return [NSString stringWithFormat:@"%i - %@", imageId, name];
+}
+
 +(void)initialize {
 	centosIcon = [[UIImage imageNamed:@"centos-icon.png"] retain];
 	centosLogo = [[UIImage imageNamed:@"centos-logo.png"] retain];
@@ -107,7 +111,7 @@ static UIImage *cloudServersBackground = nil;
 	} else if (imageId == 12) {
 		return redhatIcon;
 	} else if (imageId == 13) {
-		return archIcon;
+		return fedoraIcon;
 	} else if (imageId == 4056) {
 		return fedoraIcon;
 	} else if (imageId == 14362) {
@@ -160,7 +164,7 @@ static UIImage *cloudServersBackground = nil;
 	} else if (imageId == 12) {
 		return redhatLogo;
 	} else if (imageId == 13) {
-		return archLogo;
+		return fedoraIcon;
 	} else if (imageId == 4056) {
 		return fedoraLogo;
 	} else if (imageId == 14362) {
@@ -213,7 +217,7 @@ static UIImage *cloudServersBackground = nil;
 	} else if (imageId == 12) {
 		return redhatBackground;
 	} else if (imageId == 13) {
-		return archBackground;
+		return fedoraIcon;
 	} else if (imageId == 4056) {
 		return fedoraBackground;
 	} else if (imageId == 14362) {
