@@ -26,7 +26,7 @@
     } else if (self.settingsViewController != nil) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSNumber *enabled = [defaults objectForKey:@"password_lock_enabled"];
-        self.settingsViewController.passwordLockSwitch.enabled = [enabled boolValue];
+        [self.settingsViewController.passwordLockSwitch setOn:[enabled boolValue] animated:YES];
     }
 	[self dismissModalViewControllerAnimated:YES];
 }

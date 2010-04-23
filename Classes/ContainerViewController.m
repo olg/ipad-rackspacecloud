@@ -470,7 +470,7 @@
                 
             } else {
                 cell.textLabel.text = [NSString stringWithFormat:@"%@/", folder.name];
-        	    // TODO: include humanized size in folder object and detailText here
+
                 if ([folder.files count] == 1) {
                     cell.detailTextLabel.text = [NSString stringWithFormat:@"%i file", [folder.files count]];
                 } else {
@@ -491,12 +491,11 @@
     		ASICloudFilesObject *file = [folder.files objectAtIndex:indexPath.row];
     		cell.textLabel.text = file.name;
     		cell.detailTextLabel.text = file.contentType;
-            // TODO: restore when you have a device
-            //if ([MFMailComposeViewController canSendMail]) {
-            //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            //} else {
+            if ([MFMailComposeViewController canSendMail]) {
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            } else {
                 cell.accessoryType = UITableViewCellAccessoryNone;
-            //}
+            }
         }		
 	}
     

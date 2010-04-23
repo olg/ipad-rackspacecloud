@@ -118,7 +118,7 @@
         NSDictionary *accounts = [defaults objectForKey:@"secondary_accounts"];
         return [accounts count] + 1;
     } else {
-        return 1; // TODO: 2 if yes?
+        return 1;
     }
 }
 

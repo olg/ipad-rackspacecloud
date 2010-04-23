@@ -205,29 +205,6 @@
     
     [app.masterViewController.popoverController dismissPopoverAnimated:YES];
 }
-/*
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath2:(NSIndexPath *)indexPath {
-
-    // TODO: ContainerViewController here
-	ContainerRootViewController *vc = [[ContainerRootViewController alloc] initWithNibName:@"ContainerRootViewController" bundle:nil];
-
-	// TODO: subclass the navigationController and override shouldRotate
-    //ContainerNavigationController *navigationController = [[ContainerNavigationController alloc] initWithRootViewController:vc];
-	vc.navigationBar = navigationController.navigationBar;
-	
-	//ContainerDetailViewController *vc = [[ContainerDetailViewController alloc] initWithNibName:@"ContainerDetailViewController" bundle:nil];
-	vc.detailItem = @"Container Details";	
-	vc.container = [containers objectAtIndex:indexPath.row];
-    vc.navigationController = navigationController;
-	RackspaceCloudAppDelegate *app = [[UIApplication sharedApplication] delegate];
-    
-	app.splitViewController.viewControllers = [NSArray arrayWithObjects:self.navigationController, navigationController, nil];
-    //app.splitViewController.viewControllers = [NSArray arrayWithObjects:self.navigationController, vc, nil];
-	//app.splitViewController.delegate = vc;
-	
-	// TODO: release vc and navcontroller
-}
-*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Override to allow orientations other than the default portrait orientation.

@@ -330,9 +330,6 @@
 	} else if (indexPath.section == kActionSection) {
 		if (indexPath.row == 0) {
 			actionCell.textLabel.text = @"Reboot This Server";
-//        } else if (indexPath.row == 1) {
-//            // TODO: don't always show this?
-//            actionCell.textLabel.text = @"Launch SSH Client";
 		} else if (indexPath.row == 1) {
 			actionCell.textLabel.text = @"Rename This Server";
 		} else if (indexPath.row == 2) {
@@ -392,7 +389,6 @@
 				className = @"RebootServerViewController";
 				break;
 			case 1:
-                //className = nil; // TODO: restore
 				className = @"RenameServerViewController";
 				break;
 			case 2:
@@ -531,7 +527,10 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {	
+    
+    // TODO: stop needing this
     showSpinner = (self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+    
     [self.tableView reloadData];
 	if (fromInterfaceOrientation == UIInterfaceOrientationPortrait || fromInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 		self.noServersImage.frame = CGRectMake(102, 37, 500, 500);

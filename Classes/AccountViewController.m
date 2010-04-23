@@ -9,6 +9,7 @@
 #import "AccountViewController.h"
 #import "SettingsViewController.h"
 #import "TextFieldCell.h"
+#import "UIViewController+SpinnerView.h"
 
 
 @implementation AccountViewController
@@ -30,25 +31,29 @@
 
 -(void)saveButtonPressed:(id)sender {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *secondaryAccounts = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"secondary_accounts"]];
-    
-    if (primaryAccount) {
-        [defaults setObject:usernameTextField.text forKey:@"username_preference"];
-        [defaults setObject:apiKeyTextField.text forKey:@"api_key_preference"];
-    } else if (originalUsername) {
-        [secondaryAccounts removeObjectForKey:originalUsername];
-        [secondaryAccounts setObject:apiKeyTextField.text forKey:usernameTextField.text];
+    if (usernameTextField.text == nil || [usernameTextField.text isEqualToString:@""] || apiKeyTextField.text == nil || [apiKeyTextField.text isEqualToString:@""]) {
+        [self alert:@"Required Fields Missing" message:@"User Name and API Key are required."];
     } else {
-        [secondaryAccounts setObject:apiKeyTextField.text forKey:usernameTextField.text];
-    }
-    
-    [defaults setObject:[NSDictionary dictionaryWithDictionary:secondaryAccounts] forKey:@"secondary_accounts"];
-    
-    [defaults synchronize];
-    [self.settingsViewController.tableView reloadData];
-    
-	[self dismissModalViewControllerAnimated:YES];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary *secondaryAccounts = [NSMutableDictionary dictionaryWithDictionary:[defaults objectForKey:@"secondary_accounts"]];
+        
+        if (primaryAccount) {
+            [defaults setObject:usernameTextField.text forKey:@"username_preference"];
+            [defaults setObject:apiKeyTextField.text forKey:@"api_key_preference"];
+        } else if (originalUsername) {
+            [secondaryAccounts removeObjectForKey:originalUsername];
+            [secondaryAccounts setObject:apiKeyTextField.text forKey:usernameTextField.text];
+        } else {
+            [secondaryAccounts setObject:apiKeyTextField.text forKey:usernameTextField.text];
+        }
+        
+        [defaults setObject:[NSDictionary dictionaryWithDictionary:secondaryAccounts] forKey:@"secondary_accounts"];
+        
+        [defaults synchronize];
+        [self.settingsViewController.tableView reloadData];
+        
+        [self dismissModalViewControllerAnimated:YES];
+    }    
 }
 
 -(void)deleteButtonPressed:(id)sender {
@@ -88,7 +93,6 @@
         self.navigationItem.title = @"Primary Account";
     } else if (originalUsername) {
         self.navigationItem.title = @"Edit Account";
-        // TODO: show delete button
         self.tableView.tableFooterView = self.footerView;
     } else {
         self.navigationItem.title = @"Add Account";

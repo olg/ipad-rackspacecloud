@@ -86,7 +86,7 @@
 	
     self.clearsSelectionOnViewWillAppear = NO;
 	self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-
+    
     [super viewDidLoad];	
 }
 
@@ -202,7 +202,6 @@
         }        
         [popoverController dismissPopoverAnimated:YES];        
 	} else if (indexPath.row == 1) {
-        // TODO: password check goes here
         if ([self requiresPassword]) {
             PasswordLockViewController *vc = [[PasswordLockViewController alloc] initWithNibName:@"PasswordLockViewController" bundle:nil];
             vc.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -214,7 +213,6 @@
             [self moveToCloudServers];
         }
 	} else if (indexPath.row == 2) {
-        // TODO: password check goes here
         if ([self requiresPassword]) {
             PasswordLockViewController *vc = [[PasswordLockViewController alloc] initWithNibName:@"PasswordLockViewController" bundle:nil];
             vc.modalPresentationStyle = UIModalPresentationFormSheet;

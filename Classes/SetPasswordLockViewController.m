@@ -22,6 +22,8 @@
 #pragma mark Button Handlers
 
 -(void)cancelButtonPressed:(id)sender {
+    NSNumber *enabled = [defaults objectForKey:@"password_lock_enabled"];
+    [self.settingsViewController.passwordLockSwitch setOn:[enabled boolValue] animated:YES];
 	[self dismissModalViewControllerAnimated:YES];
 }
 
@@ -55,6 +57,11 @@
     [super viewDidLoad];
 
     defaults = [NSUserDefaults standardUserDefaults];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [newPasswordTextField becomeFirstResponder];
+    [super viewDidAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
