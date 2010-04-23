@@ -21,7 +21,7 @@
 
 
 + (id)storageRequestWithMethod:(NSString *)method containerName:(NSString *)containerName {
-	NSString *urlString = [NSString stringWithFormat:@"%@/%@", [ASICloudFilesRequest storageURL], containerName];
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@", [ASICloudFilesRequest storageURL], [containerName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 	ASICloudFilesObjectRequest *request = [[[ASICloudFilesObjectRequest alloc] initWithURL:[NSURL URLWithString:urlString]] autorelease];
 	[request setRequestMethod:method];
 	[request addRequestHeader:@"X-Auth-Token" value:[ASICloudFilesRequest authToken]];
@@ -30,7 +30,8 @@
 }
 
 + (id)storageRequestWithMethod:(NSString *)method containerName:(NSString *)containerName queryString:(NSString *)queryString {
-	NSString *urlString = [NSString stringWithFormat:@"%@/%@%@", [ASICloudFilesRequest storageURL], containerName, queryString];
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@%@", [ASICloudFilesRequest storageURL], [containerName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], queryString];
+    NSLog(@"storageRequestWithMethod URL string: %@", urlString);
 	ASICloudFilesObjectRequest *request = [[[ASICloudFilesObjectRequest alloc] initWithURL:[NSURL URLWithString:urlString]] autorelease];
 	[request setRequestMethod:method];
 	[request addRequestHeader:@"X-Auth-Token" value:[ASICloudFilesRequest authToken]];
@@ -39,7 +40,7 @@
 }
 
 + (id)storageRequestWithMethod:(NSString *)method containerName:(NSString *)containerName objectPath:(NSString *)objectPath {
-	NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@", [ASICloudFilesRequest storageURL], containerName, objectPath];
+	NSString *urlString = [NSString stringWithFormat:@"%@/%@/%@", [ASICloudFilesRequest storageURL], [containerName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], objectPath];
 	ASICloudFilesObjectRequest *request = [[[ASICloudFilesObjectRequest alloc] initWithURL:[NSURL URLWithString:urlString]] autorelease];
 	[request setRequestMethod:method];
 	[request addRequestHeader:@"X-Auth-Token" value:[ASICloudFilesRequest authToken]];
