@@ -93,11 +93,17 @@
         vc.masterViewController = nil;
         vc.settingsViewController = self;
         [self presentModalViewController:vc animated:YES];
-    } else {        
-        SetPasswordLockViewController *vc = [[SetPasswordLockViewController alloc] initWithNibName:@"SetPasswordLockViewController" bundle:nil];
-        vc.settingsViewController = self;
-        vc.modalPresentationStyle = UIModalPresentationFormSheet;
-        [self presentModalViewController:vc animated:YES];
+    } else {
+        
+        // TODO: if off, do nothing
+        NSLog(@"switch value: %i", passwordLockSwitch.on);
+        
+        if (passwordLockSwitch.on) {
+            SetPasswordLockViewController *vc = [[SetPasswordLockViewController alloc] initWithNibName:@"SetPasswordLockViewController" bundle:nil];
+            vc.settingsViewController = self;
+            vc.modalPresentationStyle = UIModalPresentationFormSheet;
+            [self presentModalViewController:vc animated:YES];
+        }
     }
 }
 
@@ -108,7 +114,6 @@
     // Return the number of sections.
     return 3;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
@@ -136,7 +141,7 @@
     if (section == kPrimaryAccountSection) {
         return @"This is the account that will appear on the login screen of this application.";
     } else if (section == kSecondaryAccountsSection) {
-        return @"To log in with a secondary account, tap the Log Out button above the Services list.";
+        return @"To log in with a secondary account, tap the Switch User button above the Services list.";
     } else {
         return @"If the password lock is turned on, you will be prompted to enter the password before you are allowed to view your Cloud Servers or Cloud Files containers.";
     }

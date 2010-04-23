@@ -48,10 +48,6 @@ static UIImage *cloudServersBackground = nil;
 
 @synthesize status, updated, name, imageId;
 
--(NSString *)name {
-    return [NSString stringWithFormat:@"%i - %@", imageId, name];
-}
-
 +(void)initialize {
 	centosIcon = [[UIImage imageNamed:@"centos-icon.png"] retain];
 	centosLogo = [[UIImage imageNamed:@"centos-logo.png"] retain];

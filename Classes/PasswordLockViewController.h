@@ -10,7 +10,7 @@
 
 @class MasterViewController, SettingsViewController;
 
-@interface PasswordLockViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface PasswordLockViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
     SEL callback;
     MasterViewController *masterViewController;
     SettingsViewController *settingsViewController;

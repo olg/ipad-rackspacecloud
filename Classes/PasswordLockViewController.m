@@ -26,7 +26,7 @@
     } else if (self.settingsViewController != nil) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSNumber *enabled = [defaults objectForKey:@"password_lock_enabled"];
-        [self.settingsViewController.passwordLockSwitch setOn:[enabled boolValue] animated:YES];
+        [self.settingsViewController.passwordLockSwitch setOn:![enabled boolValue] animated:YES];
     }
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -129,6 +129,8 @@
         cell = [[[TextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         textField = cell.textField;
         textField.secureTextEntry = YES;
+        textField.delegate = self;
+        textField.returnKeyType = UIReturnKeyGo;
     }
     
     // Configure the cell...
@@ -191,6 +193,13 @@
 	 */
 }
 
+#pragma mark -
+#pragma mark Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextField {
+    [self loginButtonPressed:nil];
+    return NO;
+}
 
 #pragma mark -
 #pragma mark Memory management
