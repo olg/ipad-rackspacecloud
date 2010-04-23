@@ -448,17 +448,12 @@
 #pragma mark -
 #pragma mark Defined in SubstitutableDetailViewController protocol
 
-- (void)showRootPopoverButtonItem:(UIBarButtonItem *)barButtonItem 
-{
-// TODO: access navigation controller
+- (void)showRootPopoverButtonItem:(UIBarButtonItem *)barButtonItem {
     [self.navigationController.navigationBar.topItem setLeftBarButtonItem:barButtonItem animated:NO];
-	//[navigationBar.topItem setLeftBarButtonItem:barButtonItem animated:NO];
 }
 
-- (void)invalidateRootPopoverButtonItem:(UIBarButtonItem *)barButtonItem
-{
+- (void)invalidateRootPopoverButtonItem:(UIBarButtonItem *)barButtonItem {
     [self.navigationController.navigationBar.topItem setLeftBarButtonItem:nil animated:NO];
-	//[navigationBar.topItem setLeftBarButtonItem:nil animated:NO];
 }
 
 #pragma mark -

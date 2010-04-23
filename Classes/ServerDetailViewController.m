@@ -26,6 +26,7 @@
 #import "UIViewController+RackspaceCloud.h"
 #import "VerifyServerResizeViewController.h"
 #import "UIViewController+RackspaceCloud.h"
+#import "PingIPAddressViewController.h"
 
 #import "ServersListViewController.h"
 
@@ -488,9 +489,9 @@
 		NSString *currentIPAddress = actionSheet.title;
 		
 		if (buttonIndex == 0) {
-			NSString *urlString = [NSString stringWithFormat:@"http://just-ping.com/index.php?vh=%@&s=ping", currentIPAddress];
-			NSURL *url = [NSURL URLWithString:urlString];
-			[[UIApplication sharedApplication] openURL:url];
+            PingIPAddressViewController *vc = [[PingIPAddressViewController alloc] initWithNibName:@"PingIPAddressViewController" bundle:nil ipAddress:currentIPAddress];
+            vc.modalPresentationStyle = UIModalPresentationPageSheet;
+            [self presentModalViewController:vc animated:YES];
 		} else if (buttonIndex == 1) {
 			UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
 			[pasteboard setString:currentIPAddress];

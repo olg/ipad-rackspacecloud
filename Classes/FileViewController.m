@@ -261,11 +261,6 @@
 }
 
 - (void)emailFileAsAttachment {
-    // TODO: container.name is failing
-    //NSLog(@"container name: %@", container.name);
-    //NSLog(@"file name:      %@", file.name);
-    //NSLog(@"file path:      %@", file.fullPath);
-    
     ASICloudFilesObjectRequest *request = [ASICloudFilesObjectRequest getObjectRequestWithContainer:self.container.name objectPath:self.file.fullPath];
     [self request:request behavior:@"attaching your file" success:@selector(downloadFileToAttachSuccess:)];
 }
