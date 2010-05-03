@@ -27,7 +27,6 @@
 }
 
 @property (retain) NSMutableArray *serverObjects;
-
 @property (retain) NSString *currentElement;
 @property (retain) NSString *currentContent;
 @property (retain) ASICloudServersServer *currentObject;

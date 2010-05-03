@@ -132,6 +132,8 @@ static UIImage *cloudServersBackground = nil;
 		return ubuntuIcon;
 	} else if (imageId == 187811) {
 		return centosIcon;
+    } else if (imageId == 49) {
+        return ubuntuIcon;
 	} else {
         return cloudServersIcon;
 	}
@@ -185,6 +187,8 @@ static UIImage *cloudServersBackground = nil;
 		return ubuntuLogo;
 	} else if (imageId == 187811) {
 		return centosLogo;
+    } else if (imageId == 49) {
+        return ubuntuLogo;
 	} else {
         return cloudServersBackground;
 	}
@@ -238,6 +242,8 @@ static UIImage *cloudServersBackground = nil;
 		return ubuntuBackground;
 	} else if (imageId == 187811) {
 		return centosBackground;
+    } else if (imageId == 49) {
+        return ubuntuBackground;
 	} else {
         return cloudServersBackground;
 	}
